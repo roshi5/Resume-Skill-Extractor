@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Skill Extractor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        h1, h2 {
+            color: #00bcd4;
+        }
+
+        form {
+            margin-bottom: 2rem;
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        input[type="file"],
+        input[type="text"] {
+            padding: 0.7rem;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: #2b2b2b;
+            color: #ffffff;
+        }
+
+        button {
+            background-color: #00bcd4;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0097a7;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #1e1e1e;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        strong {
+            font-size: 1.2rem;
+            color: #4fc3f7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resume Skill Extractor</h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Upload Resume PDF</label>
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+   <form method="get" action="/">
+    <label for="query">Search Resumes</label>
+    <input type="text" name="query" placeholder="Enter name, skill, email, phone, or experience" value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+
+    <h2>Extracted Resumes</h2>
+    <ul>
+        {% for resume in resumes %}
+        <li>
+            <strong>{{ resume[0] }}</strong><br>
+            {{ resume[1] }} | {{ resume[2] }}<br>
+            <b>Skills:</b> {{ resume[3] }}<br>
+            <b>Experience:</b> {{ resume[4] }}<br>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
